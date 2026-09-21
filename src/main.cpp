@@ -1,6 +1,7 @@
+#include <vector>
 #include <iostream>
-#include <ctime>
 #include <iomanip>
+#include <ctime>
 #include "Sensor.h"
 #include "Measurement.h"
 #include "SensorManager.h"
@@ -15,20 +16,19 @@ int main(){
     SensorManager manager(sensors);
     Sensor sens5(5);
     manager.addSensor(sens5);
+    Logger logger;
     const std::vector<Sensor>& sensorsGet= manager.getSensors();
     for (int i = 0; i<sensorsGet.size(); ++i){
-        Measurement meas1 = sensorsGet[i].read();
-        Logger logger;
-        logger.log(meas1);
-        
-        
+        Measurement measurement = sensorsGet[i].read();
+        logger.log(measurement);
+
+        std::chrono::system_clock::time_point timestamp = measurement.timestamp;
+        std::time_t now = std::chrono::system_clock::to_time_t(timestamp);
+        std::tm* localTime = std::localtime(&now);
+
+        std::cout<<"Sensor: "<<measurement.sensorId
+        <<"\n Temperature: "<<measurement.temperature
+        <<"\n Humidity: "<<measurement.humidity
+        <<"\n Created: "<<std::put_time(localTime, "%H:%M:%S")<<std::endl;
     }
-    
-    
-    
-    
-
-    
-
-    // std::cout<<"Sensor "<<sens2.id()<<" "<<sens2.read()<<std::endl;
 }

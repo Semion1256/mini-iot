@@ -4,8 +4,7 @@
 class SensorManager
 {
 public:
-    SensorManager();
-    SensorManager(const Sensor& sensor);
+    
     SensorManager(const std::vector<Sensor>&  sensors);
     void addSensor(const Sensor& sensor);
     const std::vector<Sensor>& getSensors() const;
