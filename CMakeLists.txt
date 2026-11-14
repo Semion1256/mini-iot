@@ -9,12 +9,18 @@ add_executable(sensor
     src/Sensor.cpp
     src/SensorManager.cpp
     src/Logger.cpp
+    src/MeasurementProcessor.cpp
+    src/MeasurementPrinter.cpp
+    src/UdpServer.cpp
+    src/UdpClient.cpp
     
 )
 
 add_executable(sensorTest
     tests/sensorTests.cpp
     src/Sensor.cpp
+    src/MeasurementProcessor.cpp
+    
 )
 
 target_include_directories(sensor PRIVATE src)
